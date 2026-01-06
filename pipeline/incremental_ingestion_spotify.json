@@ -26,13 +26,8 @@
 						}
 					},
 					"dataset": {
-						"referenceName": "dynamicJson",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "bronze",
-							"folder": "cdc",
-							"file": "cdc.json"
-						}
+						"referenceName": "Json1",
+						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
 				}
