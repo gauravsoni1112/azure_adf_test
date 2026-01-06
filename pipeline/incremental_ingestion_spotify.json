@@ -73,13 +73,16 @@
 		],
 		"parameters": {
 			"schema": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "bronze"
 			},
 			"table": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "cdc"
 			},
 			"cdc": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "cdc.json"
 			}
 		},
 		"annotations": []
