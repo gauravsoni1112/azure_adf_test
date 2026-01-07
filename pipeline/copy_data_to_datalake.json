@@ -162,48 +162,12 @@
 						"value": "@greater(activity('Copy data1').output.dataRead,0)",
 						"type": "Expression"
 					},
-					"ifFalseActivities": [
-						{
-							"name": "Delete1",
-							"type": "Delete",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"dataset": {
-									"referenceName": "Parquet2",
-									"type": "DatasetReference",
-									"parameters": {
-										"container": {
-											"value": "@pipeline().parameters.container",
-											"type": "Expression"
-										},
-										"folder": {
-											"value": "@concat(pipeline().parameters.table_name,'/',pipeline().parameters.landing_folder)",
-											"type": "Expression"
-										},
-										"file": "@concat(pipeline().parameters.table_name,'_',variables('current_ctc'))"
-									}
-								},
-								"enableLogging": false,
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								}
-							}
-						}
-					],
 					"ifTrueActivities": [
 						{
 							"name": "Copy data1",
 							"type": "Copy",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Script1",
