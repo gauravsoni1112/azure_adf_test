@@ -30,9 +30,18 @@
 						"referenceName": "dynamicJson",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "bronze",
-							"folder": "cdc",
-							"file": "cdc.json"
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder": {
+								"value": "@concat(pipeline().parameters.table,'/',pipeline().parameters.cdc_folder)",
+								"type": "Expression"
+							},
+							"file": {
+								"value": "@pipeline().parameters.cdc_file",
+								"type": "Expression"
+							}
 						}
 					},
 					"firstRowOnly": false
@@ -122,7 +131,7 @@
 						"parameters": {
 							"container": "bronze",
 							"folder": {
-								"value": "@pipeline().parameters.table",
+								"value": "@concat(pipeline().parameters.table,'/',pipeline().parameters.landing_data_folder)",
 								"type": "Expression"
 							},
 							"file": {
@@ -168,9 +177,12 @@
 									"referenceName": "Parquet1",
 									"type": "DatasetReference",
 									"parameters": {
-										"container": "bronze",
+										"container": {
+											"value": "@pipeline().parameters.container",
+											"type": "Expression"
+										},
 										"folder": {
-											"value": "@pipeline().parameters.table",
+											"value": "@concat(pipeline().parameters.table,'/',pipeline().parameters.landing_data_folder)",
 											"type": "Expression"
 										},
 										"file": {
@@ -245,8 +257,14 @@
 									"referenceName": "dynamicJson",
 									"type": "DatasetReference",
 									"parameters": {
-										"container": "bronze",
-										"folder": "cdc",
+										"container": {
+											"value": "@pipeline().parameters.container",
+											"type": "Expression"
+										},
+										"folder": {
+											"value": "@concat(pipeline().parameters.table,'/',pipeline().parameters.cdc_folder)",
+											"type": "Expression"
+										},
 										"file": "empty.json"
 									}
 								}
@@ -256,9 +274,18 @@
 									"referenceName": "dynamicJson",
 									"type": "DatasetReference",
 									"parameters": {
-										"container": "bronze",
-										"folder": "cdc",
-										"file": "cdc.json"
+										"container": {
+											"value": "@pipeline().parameters.container",
+											"type": "Expression"
+										},
+										"folder": {
+											"value": "@concat(pipeline().parameters.table,'/',pipeline().parameters.cdc_folder)",
+											"type": "Expression"
+										},
+										"file": {
+											"value": "@pipeline().parameters.cdc_file",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -298,7 +325,8 @@
 		],
 		"parameters": {
 			"schema": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "dbo"
 			},
 			"table": {
 				"type": "string"
@@ -308,6 +336,22 @@
 			},
 			"from_date": {
 				"type": "string"
+			},
+			"cdc_folder": {
+				"type": "string",
+				"defaultValue": "cdc"
+			},
+			"landing_data_folder": {
+				"type": "string",
+				"defaultValue": "landing_data"
+			},
+			"container": {
+				"type": "string",
+				"defaultValue": "bronze"
+			},
+			"cdc_file": {
+				"type": "string",
+				"defaultValue": "cdc.json"
 			}
 		},
 		"variables": {
